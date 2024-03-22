@@ -1,5 +1,6 @@
 # import uuid
 # from flask import Flask, request
+from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
@@ -28,6 +29,7 @@ from rq import Queue
 
 def create_app(db_url=None): # allow to create an app with a certain database url, default is the local SQLite URL
     app = Flask(__name__)
+    load_dotenv()
 
     # connection = redis.from_url(
     #     os.getenv("REDIS_URL")
@@ -121,13 +123,13 @@ def create_app(db_url=None): # allow to create an app with a certain database ur
     # with app.app_context():
     #     db.create_all()
 
-    # @app.before_request
-    # def create_tables():
-    #     # The following line will remove this handler, making it
-    #     # only run on the first request
-    #     app.before_request_funcs[None].remove(create_tables)
+    @app.before_request
+    def create_tables():
+        # The following line will remove this handler, making it
+        # only run on the first request
+        app.before_request_funcs[None].remove(create_tables)
 
-    #     db.create_all()
+        db.create_all()
 
 
 

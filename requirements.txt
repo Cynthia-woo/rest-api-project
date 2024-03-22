@@ -7,5 +7,6 @@ flask-migrate
 flask-jwt-extended
 passlib
 requests
+gunicorn
 rq
 redis

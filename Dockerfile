@@ -21,4 +21,4 @@ COPY . .
 
 # commands that should run when the iamge starts a container
 # CMD ["flask", "run", "--host", "0.0.0.0"]
-CMD ["gunicorn", "--bing", "0.0.0.0:80", "app:create_app()"] # can pass in database
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:create_app()"] # can pass in database
